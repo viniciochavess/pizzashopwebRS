@@ -3,6 +3,7 @@ import "../index.css";
 import App from "../App";
 import { AppLayout } from "../layout/AppLayout";
 import { SignIn } from "../pages/auth/Sign-In";
+import { AuthLayout } from "../layout/AuthLayout";
 export function IndexRoutes() {
   return (
     <Routes>
@@ -10,7 +11,7 @@ export function IndexRoutes() {
         <Route index element={<App />} />
       </Route>
 
-      <Route path="/auth" element={<AppLayout />}>
+      <Route path="/authenticate" element={<AuthLayout />}>
         <Route index element={<SignIn />} />
       </Route>
 
