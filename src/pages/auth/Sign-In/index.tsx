@@ -1,8 +1,33 @@
 import { Button } from "../../../components/ui/button";
 import { Input } from "../../../components/ui/input";
 import { Label } from "../../../components/ui/label";
+import { useForm} from 'react-hook-form'
+import z from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+
+
+
+const signInFormSchema = z.object({
+  email: z.string().email("Email inválido"),
+})
+
+
+type SignInFormData = z.infer<typeof signInFormSchema>
 
 export function SignIn() {
+  const {register, handleSubmit,formState:{isSubmitting}} = useForm<SignInFormData>({
+    defaultValues: {
+      email: "",
+    },
+    resolver: zodResolver(signInFormSchema),
+  });
+
+async function handleSignIn(data:SignInFormData) {
+  await new Promise((resolve) => setTimeout(resolve, 2000));
+  console.log(data);
+}
+
+
   return (
     <>
      <div className="p-8">
@@ -16,13 +41,13 @@ export function SignIn() {
              </p>
            </div>
  
-           <form className="space-y-4">
+           <form className="space-y-4" onSubmit={handleSubmit(handleSignIn)}>
              <div className="space-y-2">
                <Label htmlFor="email">Seu e-mail</Label>
-               <Input id="email" type="email" />
+               <Input id="email" type="email" {...register("email")} />
              </div>
  
-             <Button className="w-full cursor-pointer" type="submit">
+             <Button disabled={isSubmitting} className="w-full cursor-pointer" type="submit">
                Acessar painel
              </Button>
            </form>
