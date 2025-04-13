@@ -4,6 +4,7 @@ import { Label } from "../../../components/ui/label";
 import { useForm} from 'react-hook-form'
 import z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { toast } from "sonner";
 
 
 
@@ -24,6 +25,7 @@ export function SignIn() {
 
 async function handleSignIn(data:SignInFormData) {
   await new Promise((resolve) => setTimeout(resolve, 2000));
+  toast.success("Login realizado com sucesso!")
   console.log(data);
 }
 
