@@ -1,12 +1,11 @@
-import { Button } from "./components/ui/button";
+import { HelmetProvider } from "react-helmet-async";
+import { RouterProvider } from "react-router-dom";
+import { Toaster } from "sonner";
+import { IndexRoutes } from "./routes";
 
 function App() {
   return (
-    <>
-      <div className="flex justify-center items-center h-screen">
-        <Button variant="outline">Default</Button>
-      </div>
-    </>
+    <></>
   );
 }
 
