@@ -1,15 +1,17 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
-import { IndexRoutes } from "./routes/index.tsx";
-import {Toaster} from 'sonner'
+import { RouterProvider } from "react-router-dom";
+
+import { Toaster } from "sonner";
+import { IndexRoutes } from "./routes";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 
 createRoot(document.getElementById("root")!).render(
-  
-  <BrowserRouter>
-    <StrictMode>
-      <Toaster richColors />
-      <IndexRoutes />
-    </StrictMode>
-  </BrowserRouter>
+  <StrictMode>
+    <HelmetProvider>
+      <Helmet titleTemplate="%s - Pizza shop" />
+      <Toaster richColors position="top-right" />
+      <RouterProvider router={IndexRoutes} />
+    </HelmetProvider>
+  </StrictMode>
 );
