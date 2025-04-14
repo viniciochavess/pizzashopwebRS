@@ -1,21 +1,26 @@
-import { Route, Routes } from "react-router-dom";
 import "../index.css";
-import App from "../App";
+
 import { AppLayout } from "../layout/AppLayout";
 import { SignIn } from "../pages/auth/Sign-In";
 import { AuthLayout } from "../layout/AuthLayout";
-export function IndexRoutes() {
-  return (
-    <Routes>
-      <Route path="/" Component={AppLayout}>
-        <Route index element={<App />} />
-      </Route>
+import { createBrowserRouter } from "react-router-dom";
+import { Dashboard } from "../pages/app/Dashboard";
+import { SignUp } from "../pages/auth/sign-up";
 
-      <Route path="/authenticate" element={<AuthLayout />}>
-        <Route index element={<SignIn />} />
-      </Route>
-
-      <Route path="*" element={<div>404 Not Found</div>} />
-    </Routes>
-  );
-}
+export const IndexRoutes = createBrowserRouter([
+  {
+    path: "/", 
+    element: <AppLayout />,
+    children: [
+      { path: "/", element: <Dashboard /> },
+    ],
+  },
+  {
+    path: "/", 
+    element: <AuthLayout />,
+    children: [
+      { path: "sign-in", element: <SignIn /> },
+      { path: "sign-up", element: <SignUp /> }, 
+    ],
+  },
+]);
